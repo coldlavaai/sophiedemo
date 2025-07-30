@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background-color: #000000;
+      background-color: #0a0908;
       color: #ffffff;
       display: flex;
       flex-direction: column;
@@ -34,11 +34,12 @@
       font-size: 1.2rem;
       text-align: center;
       max-width: 600px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     vapi-widget {
-      margin-top: 20px;
+      display: block;
+      margin: 20px auto;
     }
   </style>
 </head>
@@ -49,7 +50,7 @@
   <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" alt="Sophie" class="sophie-image" />
 
   <div class="text">
-    Tap the button below to start a conversation with <strong>Sophie</strong>, your AI assistant from Cold Lava.
+    Tap the button to talk to <strong>Sophie</strong>, our Cold Lava Agent.
   </div>
 
   <vapi-widget
@@ -57,19 +58,18 @@
     assistant-id="eeb05e21-693b-46ca-ab85-478b402c43ba"
     mode="voice"
     theme="dark"
-    base-bg-color="#000000"
+    base-bg-color="#0a0908"
     accent-color="#14B8A6"
     cta-button-color="#000000"
     cta-button-text-color="#ffffff"
     border-radius="large"
     size="compact"
-    position="bottom-right"
     title="Talk To Sophie"
     start-button-text="Start"
     end-button-text="End Call"
     chat-first-message="Hey, How can I help you today?"
-    chat-placeholder="Type your message..."
-    voice-show-transcript="true"
+    chat-placeholder="Let's chat.."
+    voice-show-transcript="false"
     consent-required="true"
     consent-title="Terms and conditions"
     consent-content="By clicking 'Agree,' and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
