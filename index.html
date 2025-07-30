@@ -80,30 +80,28 @@
     <div class="status-text" id="callStatus">Tap the phone to talk to Sophie</div>
   </div>
 
-  <!-- Vapi SDK and call script -->
+  <!-- Vapi SDK with autoplay:true -->
   <script src="https://unpkg.com/@vapi-ai/web"></script>
   <script>
     const vapi = new Vapi('9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9');
     const callStatus = document.getElementById("callStatus");
 
     function startCall() {
-      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba');
+      callStatus.innerText = "Connecting to Sophie...";
+      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba', { autoplay: true });
     }
 
-    vapi.on("call-start", () => {
-      callStatus.innerText = "Connecting to Sophie...";
+    vapi.on("media-connected", () => {
+      callStatus.innerText = "Call in progress with Sophie...";
     });
 
     vapi.on("call-end", () => {
       callStatus.innerText = "Call ended. Tap the phone to talk to Sophie";
     });
 
-    vapi.on("error", () => {
+    vapi.on("error", (err) => {
+      console.error("Vapi error:", err);
       callStatus.innerText = "Error connecting. Try again later.";
-    });
-
-    vapi.on("media-connected", () => {
-      callStatus.innerText = "Call in progress with Sophie...";
     });
   </script>
 
