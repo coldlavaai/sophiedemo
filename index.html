@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,33 +76,36 @@
 
   <!-- Call Button -->
   <div class="call-button-container">
-    <button class="call-button" id="callBtn">📞</button>
+    <button class="call-button" onclick="startCall()" id="callBtn">📞</button>
     <div class="status-text" id="callStatus">Tap the phone to talk to Sophie</div>
   </div>
 
-  <!-- Vapi SDK (corrected) -->
+  <!-- Vapi SDK -->
   <script src="https://unpkg.com/@vapi-ai/web"></script>
   <script>
-    const callStatus = document.getElementById("callStatus");
-
     const vapi = new Vapi('9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9');
 
-    document.getElementById("callBtn").addEventListener("click", () => {
-      callStatus.innerText = "Connecting to Sophie...";
-      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba');
-    });
+    const callStatus = document.getElementById("callStatus");
+    const callBtn = document.getElementById("callBtn");
 
-    vapi.on("media-connected", () => {
-      callStatus.innerText = "Call in progress with Sophie...";
+    function startCall() {
+      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba');
+    }
+
+    vapi.on("call-start", () => {
+      callStatus.innerText = "Connecting to Sophie...";
     });
 
     vapi.on("call-end", () => {
       callStatus.innerText = "Call ended. Tap the phone to talk to Sophie";
     });
 
-    vapi.on("error", (err) => {
-      console.error("Vapi error:", err);
+    vapi.on("error", () => {
       callStatus.innerText = "Error connecting. Try again later.";
+    });
+
+    vapi.on("media-connected", () => {
+      callStatus.innerText = "Call in progress with Sophie...";
     });
   </script>
 
