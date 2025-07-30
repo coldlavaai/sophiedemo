@@ -33,11 +33,33 @@
       box-shadow: 0 0 20px #00fcd3;
       max-width: 220px;
     }
-    #status {
+    .status-text {
       margin-top: 30px;
       font-size: 18px;
+      font-weight: bold;
       color: #00fcd3;
-      text-shadow: 0 0 10px #00fcd3;
+      text-shadow: 0 0 8px #00fcd3;
+    }
+    .custom-call-button {
+      margin-top: 30px;
+      background-color: #00fcd3;
+      border: 3px solid #000;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #00fcd3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .custom-call-button img {
+      width: 24px;
+      height: 24px;
     }
   </style>
 </head>
@@ -45,13 +67,19 @@
   <div class="container">
     <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/New_Project_3.png?v=1753174700" class="logo" alt="Cold Lava Logo">
     <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" class="profile" alt="Sophie">
-    <div id="status">Tap the phone to talk to Sophie</div>
+    <div class="custom-call-button" onclick="vapiInstance.start()">
+      <img src="https://static.thenounproject.com/png/157420-200.png" alt="Call Icon">
+    </div>
+    <div class="status-text" id="callStatus">Tap the phone to talk to Sophie</div>
   </div>
 
   <script>
     var vapiInstance = null;
     const assistant = "eeb05e21-693b-46ca-ab85-478b402c43ba";
     const apiKey = "9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9";
+    const buttonConfig = {
+      position: "hidden"
+    };
 
     (function (d, t) {
       var g = document.createElement(t),
@@ -65,18 +93,10 @@
         vapiInstance = window.vapiSDK.run({
           apiKey: apiKey,
           assistant: assistant,
-          config: {
-            position: "bottom-center"
-          },
-          onCallStart: () => {
-            document.getElementById("status").textContent = "Connecting...";
-          },
-          onCallEstablished: () => {
-            document.getElementById("status").textContent = "Call in progress";
-          },
-          onCallEnd: () => {
-            document.getElementById("status").textContent = "Call ended. Tap to talk to Sophie";
-          },
+          config: buttonConfig,
+          onCallStarted: () => document.getElementById("callStatus").innerText = "Call in progress...",
+          onCallEnded: () => document.getElementById("callStatus").innerText = "Call ended. Tap to talk again.",
+          onCallConnecting: () => document.getElementById("callStatus").innerText = "Connecting..."
         });
       };
     })(document, "script");
