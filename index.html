@@ -37,7 +37,7 @@
       margin-bottom: 20px;
     }
 
-    vapi-widget {
+    vapi-widget.voice-center {
       display: block;
       margin: 20px auto;
     }
@@ -50,10 +50,12 @@
   <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" alt="Sophie" class="sophie-image" />
 
   <div class="text">
-    Tap the button to talk to <strong>Sophie</strong>, our Cold Lava Agent.
+    Please select <strong>Web chat (left)</strong> or <strong>talk to Sophie (right)</strong>.
   </div>
 
+  <!-- Voice Widget (centered on page) -->
   <vapi-widget
+    class="voice-center"
     public-key="9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9"
     assistant-id="eeb05e21-693b-46ca-ab85-478b402c43ba"
     mode="voice"
@@ -70,6 +72,31 @@
     chat-first-message="Hey, How can I help you today?"
     chat-placeholder="Let's chat.."
     voice-show-transcript="false"
+    consent-required="true"
+    consent-title="Terms and conditions"
+    consent-content="By clicking 'Agree,' and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
+    consent-storage-key="vapi_widget_consent"
+  ></vapi-widget>
+
+  <!-- Chat Widget (floating bottom-left) -->
+  <vapi-widget
+    public-key="9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9"
+    assistant-id="eeb05e21-693b-46ca-ab85-478b402c43ba"
+    mode="chat"
+    theme="dark"
+    base-bg-color="#000000"
+    accent-color="#14B8A6"
+    cta-button-color="#000000"
+    cta-button-text-color="#ffffff"
+    border-radius="large"
+    size="compact"
+    position="bottom-left"
+    title="Sophie Web Chat"
+    start-button-text="Start"
+    end-button-text="End Call"
+    chat-first-message="Hey, How can I help you today?"
+    chat-placeholder="Type your message..."
+    voice-show-transcript="true"
     consent-required="true"
     consent-title="Terms and conditions"
     consent-content="By clicking 'Agree,' and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
