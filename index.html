@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background-color: #1d1f29;
+      background: linear-gradient(to bottom, #00c7d2 0%, #0a0908 80%);
       color: #ffffff;
       display: flex;
       flex-direction: column;
@@ -53,7 +53,7 @@
     Please select <strong>Web chat (left)</strong> or <strong>talk to Sophie (right)</strong>.
   </div>
 
-  <!-- Voice Widget (centered on page) -->
+  <!-- Voice Widget (centered) -->
   <vapi-widget
     class="voice-center"
     public-key="9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9"
@@ -78,7 +78,7 @@
     consent-storage-key="vapi_widget_consent"
   ></vapi-widget>
 
-  <!-- Chat Widget (floating bottom-left) -->
+  <!-- Web Chat Widget (bottom-left) -->
   <vapi-widget
     public-key="9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9"
     assistant-id="eeb05e21-693b-46ca-ab85-478b402c43ba"
