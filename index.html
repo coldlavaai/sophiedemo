@@ -84,12 +84,11 @@
   <script src="https://unpkg.com/@vapi-ai/web"></script>
   <script>
     const vapi = new Vapi('9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9');
-
     const callStatus = document.getElementById("callStatus");
-    const callBtn = document.getElementById("callBtn");
 
     function startCall() {
-      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba');
+      callStatus.innerText = "Connecting to Sophie...";
+      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba', { autoplay: true });
     }
 
     vapi.on("call-start", () => {
