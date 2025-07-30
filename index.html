@@ -1,109 +1,82 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Talk to Sophie</title>
+  <title>Talk to Sophie | Cold Lava</title>
   <style>
     body {
-      background-color: #0a0a0a;
       margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      color: #00fdd8;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #000000;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
+      padding-top: 40px;
     }
 
     .logo {
-      width: 60px;
+      width: 160px;
       margin-bottom: 20px;
     }
 
     .sophie-image {
-      width: 260px;
-      height: 340px;
-      border-radius: 50%;
-      border: 6px solid #00fdd8;
-      box-shadow: 0 0 30px #00fdd8;
-      object-fit: cover;
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+      margin-bottom: 20px;
+    }
+
+    .text {
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 600px;
       margin-bottom: 30px;
     }
 
-    .call-button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .call-button {
-      background-color: #00fdd8;
-      color: black;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      transition: transform 0.2s;
-    }
-
-    .call-button:hover {
-      transform: scale(1.1);
-    }
-
-    .status-text {
-      font-size: 16px;
-      text-align: center;
-      text-shadow: 0 0 8px #00fdd8;
+    vapi-widget {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Logo -->
-  <img class="logo" src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/New_Project_3.png?v=1753174700" alt="Cold Lava Logo">
+  <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/LAVA_1.png?v=1753207208" alt="Cold Lava Logo" class="logo" />
 
-  <!-- Sophie Image -->
-  <img class="sophie-image" src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" alt="Sophie">
+  <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" alt="Sophie" class="sophie-image" />
 
-  <!-- Call Button -->
-  <div class="call-button-container">
-    <button class="call-button" onclick="startCall()" id="callBtn">📞</button>
-    <div class="status-text" id="callStatus">Tap the phone to talk to Sophie</div>
+  <div class="text">
+    Tap the button below to start a conversation with <strong>Sophie</strong>, your AI assistant from Cold Lava.
   </div>
 
-  <!-- Vapi SDK with autoplay:true -->
-  <script src="https://unpkg.com/@vapi-ai/web"></script>
-  <script>
-    const vapi = new Vapi('9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9');
-    const callStatus = document.getElementById("callStatus");
+  <vapi-widget
+    public-key="9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9"
+    assistant-id="eeb05e21-693b-46ca-ab85-478b402c43ba"
+    mode="voice"
+    theme="dark"
+    base-bg-color="#000000"
+    accent-color="#14B8A6"
+    cta-button-color="#000000"
+    cta-button-text-color="#ffffff"
+    border-radius="large"
+    size="compact"
+    position="bottom-right"
+    title="Talk To Sophie"
+    start-button-text="Start"
+    end-button-text="End Call"
+    chat-first-message="Hey, How can I help you today?"
+    chat-placeholder="Type your message..."
+    voice-show-transcript="true"
+    consent-required="true"
+    consent-title="Terms and conditions"
+    consent-content="By clicking 'Agree,' and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
+    consent-storage-key="vapi_widget_consent"
+  ></vapi-widget>
 
-    function startCall() {
-      callStatus.innerText = "Connecting to Sophie...";
-      vapi.start('eeb05e21-693b-46ca-ab85-478b402c43ba', { autoplay: true });
-    }
-
-    vapi.on("media-connected", () => {
-      callStatus.innerText = "Call in progress with Sophie...";
-    });
-
-    vapi.on("call-end", () => {
-      callStatus.innerText = "Call ended. Tap the phone to talk to Sophie";
-    });
-
-    vapi.on("error", (err) => {
-      console.error("Vapi error:", err);
-      callStatus.innerText = "Error connecting. Try again later.";
-    });
-  </script>
+  <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
 
 </body>
 </html>
