@@ -33,21 +33,11 @@
       box-shadow: 0 0 20px #00fcd3;
       max-width: 220px;
     }
-    .talk-button {
-      margin-top: 40px;
-      padding: 15px 30px;
+    #status {
+      margin-top: 30px;
       font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      background: #00fcd3;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 0 20px #00fcd3;
-      transition: background 0.3s ease;
-    }
-    .talk-button:hover {
-      background: #00cfb6;
+      color: #00fcd3;
+      text-shadow: 0 0 10px #00fcd3;
     }
   </style>
 </head>
@@ -55,14 +45,13 @@
   <div class="container">
     <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/New_Project_3.png?v=1753174700" class="logo" alt="Cold Lava Logo">
     <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/f63e1b45-8157-4920-ab3f-2833797fb6b9.png?v=1753867612" class="profile" alt="Sophie">
-    <button class="talk-button" onclick="vapiInstance.start()">Talk to Sophie</button>
+    <div id="status">Tap the phone to talk to Sophie</div>
   </div>
 
   <script>
     var vapiInstance = null;
     const assistant = "eeb05e21-693b-46ca-ab85-478b402c43ba";
     const apiKey = "9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9";
-    const buttonConfig = {};
 
     (function (d, t) {
       var g = document.createElement(t),
@@ -76,7 +65,18 @@
         vapiInstance = window.vapiSDK.run({
           apiKey: apiKey,
           assistant: assistant,
-          config: buttonConfig,
+          config: {
+            position: "bottom-center"
+          },
+          onCallStart: () => {
+            document.getElementById("status").textContent = "Connecting...";
+          },
+          onCallEstablished: () => {
+            document.getElementById("status").textContent = "Call in progress";
+          },
+          onCallEnd: () => {
+            document.getElementById("status").textContent = "Call ended. Tap to talk to Sophie";
+          },
         });
       };
     })(document, "script");
