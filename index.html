@@ -62,7 +62,9 @@
     const assistant = "eeb05e21-693b-46ca-ab85-478b402c43ba";
     const apiKey = "9bf2cd14-2fd3-4f5c-9fd8-34a8ad7437a9";
     const buttonConfig = {
-      showButton: false // ✅ Hides the floating Vapi button completely
+      layout: {
+        showButton: false
+      }
     };
 
     (function (d, t) {
@@ -77,7 +79,7 @@
         vapiInstance = window.vapiSDK.run({
           apiKey: apiKey,
           assistant: assistant,
-          config: buttonConfig,
+          config: buttonConfig
         });
       };
     })(document, "script");
