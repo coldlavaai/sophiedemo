@@ -41,6 +41,29 @@
       display: block;
       margin: 20px auto;
     }
+    /* Retell Voice Widget - Add this before </style> */
+.retell-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+.retell-button {
+  width: 60px;
+  height: 60px;
+  background: #4CAF50;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.retell-button:hover {
+  background: #45a049;
+  transform: scale(1.1);
+}
   </style>
 </head>
 <body>
@@ -75,10 +98,42 @@
     consent-storage-key="vapi_widget_consent"
   ></vapi-widget>
 
+  <!-- Retell Voice Widget - Add this before the vapi script -->
+<div class="retell-widget">
+  <button id="retell-voice-btn" class="retell-button">🎤</button>
+</div>
   <!-- Widget script -->
   <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
 
-</div>
+<!-- Add these scripts after the vapi script -->
+<script src="https://cdn.jsdelivr.net/npm/@retellai/web-sdk@latest/dist/retell-web-sdk.min.js"></script>
+<script>
+// Replace 'YOUR_AGENT_ID' and 'YOUR_PUBLIC_KEY' with your actual Retell credentials
+document.getElementById('retell-voice-btn').addEventListener('click', async function() {
+  try {
+    const retellClient = new RetellWebClient();
+    
+    const response = await fetch('https://api.retellai.com/v2/create-web-call', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer public_key_09bbd18bfb973540a625d',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ agent_id: 'agent_6b974ba4769d7b7b8df27d05d0' })
+    });
+    
+    const data = await response.json();
+    
+    await retellClient.startConversation({
+      accessToken: data.access_token,
+      sampleRate: 24000
+    });
+    
+  } catch (error) {
+    alert('Voice call failed: ' + error.message);
+  }
+});
+</script>
 
 </body>
 </html>
