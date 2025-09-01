@@ -21,6 +21,13 @@
     .logo {
       width: 160px;
       margin-bottom: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 8px 25px rgba(255, 255, 255, 0.3));
     }
 
     .sophie-image {
@@ -28,6 +35,42 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
       margin-bottom: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sophie-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(20, 184, 166, 0.6), 0 8px 25px rgba(20, 184, 166, 0.3);
+    }
+
+    .sophie-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hover-banner {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      color: #1f2937;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .sophie-container:hover .hover-banner {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
     }
 
     .text {
@@ -42,7 +85,10 @@
 
   <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/LAVA_1.png?v=1753207208" alt="Cold Lava Logo" class="logo" />
 
-  <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/ChatGPT_Image_Aug_31_2025_09_02_37_PM_1.png?v=1756670610" alt="Sophie" class="sophie-image" />
+  <div class="sophie-container">
+    <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/ChatGPT_Image_Aug_31_2025_09_02_37_PM_1.png?v=1756670610" alt="Sophie" class="sophie-image" />
+    <div class="hover-banner">Tap the widget to text or voice chat with me...</div>
+  </div>
 
 </div>
         <!-- VAPI Hybrid Chat Widget (Premium Voice + Text) -->
@@ -80,16 +126,53 @@
             box-sizing: border-box !important;
           }
 
+          #vapi-speech-bubble {
+            position: absolute !important;
+            bottom: 65px !important;
+            right: 80px !important;
+            background: white !important;
+            color: #374151 !important;
+            padding: 8px 12px !important;
+            border-radius: 18px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            white-space: nowrap !important;
+            border: 1px solid #e5e7eb !important;
+            opacity: 0 !important;
+            transform: translateY(10px) !important;
+            transition: all 0.3s ease !important;
+            pointer-events: none !important;
+          }
+
+          #vapi-speech-bubble::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 50% !important;
+            right: -6px !important;
+            transform: translateY(-50%) !important;
+            width: 0 !important;
+            height: 0 !important;
+            border-left: 6px solid white !important;
+            border-top: 6px solid transparent !important;
+            border-bottom: 6px solid transparent !important;
+          }
+
+          #vapi-hybrid-widget:hover #vapi-speech-bubble {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+          }
+
           #vapi-chat-button {
             width: 60px !important;
-            height: 60px !important;
-            border-radius: 50% !important;
-            background: #077d3a !important;
+            height: 90px !important;
+            border-radius: 30px !important;
+            background: #3b82f6 !important;
             border: none !important;
             color: #077d3a !important;
             font-size: 24px !important;
             cursor: pointer !important;
-            box-shadow: 0 4px 12px rgba(3, 69, 55, 0.3) !important;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
             transition: all 0.3s ease !important;
             display: flex !important;
             align-items: center !important;
@@ -100,7 +183,7 @@
 
           #vapi-chat-button:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 6px 20px rgba(3, 69, 55, 0.4) !important;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
           }
 
           #vapi-chat-panel {
@@ -439,8 +522,13 @@
 
         <!-- VAPI Widget HTML -->
         <div id="vapi-hybrid-widget">
+          <!-- Speech Bubble -->
+          <div id="vapi-speech-bubble">How can I help?</div>
+          
           <!-- Chat Button -->
-          <button id="vapi-chat-button" aria-label="Open chat">💬</button>
+          <button id="vapi-chat-button" aria-label="Open chat">
+            <img src="https://cdn.shopify.com/s/files/1/0951/6141/8067/files/ChatGPT_Image_Aug_31_2025_09_02_37_PM_1.png?v=1756670610" alt="Sophie" style="width: 50px; height: 80px; border-radius: 25px; object-fit: cover;" />
+          </button>
 
           <!-- Chat Panel -->
           <div id="vapi-chat-panel" role="dialog" aria-labelledby="vapi-chat-title" class="vapi-text-mode">
