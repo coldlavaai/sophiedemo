@@ -600,7 +600,7 @@
                   elements.voiceStatus.textContent = 'Listening to you...';
                   elements.voiceButton.classList.add('listening');
                 } else if (message.role === 'assistant' && message.status === 'started') {
-                  elements.voiceStatus.textContent = 'Alex is speaking...';
+                  elements.voiceStatus.textContent = 'Sophie is speaking...';
                   elements.voiceButton.classList.remove('listening');
                 } else if (message.status === 'stopped') {
                   elements.voiceStatus.textContent = 'Ready - speak now or click to end';
@@ -820,7 +820,7 @@
                   <span style="animation: fade 1.4s ease-in-out infinite; animation-delay: 0s;">•</span>
                   <span style="animation: fade 1.4s ease-in-out infinite; animation-delay: 0.2s;">•</span>
                   <span style="animation: fade 1.4s ease-in-out infinite; animation-delay: 0.4s;">•</span>
-                  <span style="margin-left: 8px;">Alex is typing...</span>
+                  <span style="margin-left: 8px;">Sophie is typing...</span>
                 </div>
                 <style>
                   @keyframes fade {
