@@ -51,6 +51,16 @@
           :root {
             --vapi-primary-color: #034537;
             --vapi-accent-color: #f5ced5;
+            
+             /* Hide various Vapi support buttons */
+            #vapi-support-btn,
+            .vapi-btn,
+            button[title*="Have a quick question"],
+            button[class*="vapi-btn"] {
+              display: none !important;
+              visibility: hidden !important;
+            }
+            
           }
 
           #vapi-hybrid-widget {
